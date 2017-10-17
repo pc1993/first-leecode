@@ -14,7 +14,7 @@
         }
         return result;
     }
-
+vector.push_back的用法，以及vector这一系列指令的用法
 
 
 
