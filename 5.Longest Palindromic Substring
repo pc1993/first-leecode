@@ -1,0 +1,37 @@
+string longestPalindrome(string s) {
+        int n=s.size();
+        if(n<2)
+        {
+            return s;
+        }
+        int m_len=1;
+        int start=0;
+        for(int i=0;i<n;)
+        {
+            int right=i;
+            int left=i;
+            if(s.size()<m_len/2) break;
+            while(right<n&&s[right]==s[right+1])
+            {
+                right++;
+            }
+            i=right+1;
+            while(left>0&&right<n&&s[left-1]==s[right+1])
+            {
+                left--;
+                right++;
+            }
+            int n_len=right-left+1;
+            if(n_len>m_len)
+            {
+                m_len=n_len;
+                start=left;
+            }
+            
+        }
+        return s.substr(start, m_len);
+        
+    }
+    
+    
+    做题之前，先搞清楚题目是什么意思，比如Longest Palindromic Substring是求最长回文  
