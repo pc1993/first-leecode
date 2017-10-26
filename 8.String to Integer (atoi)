@@ -2,12 +2,11 @@
 When pos is specified, the search only includes characters at or after position pos, ignoring any possible occurrences 
 before that character.
 2.string a='1'与int a='1'，两者含义不一样，前者是代表字符，后者是一个数字，如要转化，需要用特定的函数
+3.防止溢出，采用long型数据
  int myAtoi(string str) {
         int n=str.size();
         int m=1;
-        int sum=0;
-        for(int i=0;i<n;)
-        {
+        long sum=0;
             i=str.find_first_not_of(' ');
                 if(str[i]=='+'||str[i]=='-')
                 {
@@ -26,7 +25,6 @@ before that character.
                     {
                         return INT_MIN;
                     }
-                }
          return sum*m;   
         }
     }
