@@ -1,0 +1,55 @@
+原始函数（string）return “”
+原始函数（vector<int>）return{}
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        if(nums.size()<2)
+        {
+            return {};
+        }
+        std::sort(nums.begin(),nums.end());
+        vector<vector<int>> result;
+        int n=nums.size();
+        for(int i=0;i<n;i++)
+        {
+            int target=-nums[i];
+            int left=i+1;
+            int right=n-1;
+            while(left<right)
+            {
+                int sum=nums[left]+nums[right];
+                if(sum<target)
+                {
+                    left++;
+                }
+                else if(sum>target)
+                {
+                    right--;
+                }
+                else
+                {
+                    vector<int> res;
+                    res.push_back(nums[i]);
+                    res.push_back(nums[left]);
+                    res.push_back(nums[right]);
+                    result.push_back(res);
+                    left++;
+                    right--;
+                    while(left<right&&nums[left]==res[1])
+                    {
+                        left++;
+                    }
+                    while(left<right&&nums[right]==res[2])
+                    {
+                        right--;
+                    }
+                }
+            }
+            while(i<n-1&&nums[i]==nums[i+1])
+            {
+                i++;
+            }
+        }
+        return result;
+    }
+};
