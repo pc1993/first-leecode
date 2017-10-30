@@ -1,0 +1,30 @@
+算法可能是对的，但是细节还是需要推敲才能写出完整的code
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+        vector<string> result;
+        if(digits.empty()) return vector<string>();
+        result.push_back("");
+        int n=digits.size();
+        static const vector<string> ref={"0","1","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        for(int i=0;i<n;i++)
+        {
+            vector<string> tempres;
+            int num=digits[i]-'0';
+            string tem=ref[num];
+            if(num < 0 || num > 9) break;
+            if(num>=0&&num<=9)
+            {
+                for(int j=0;j<tem.size();j++)
+                {
+                    for(int k=0;k<result.size();k++)
+                    {
+                        tempres.push_back(result[k]+tem[j]);
+                    }
+                }
+            }
+            result=tempres;
+        }
+        return result;
+    }
+};
