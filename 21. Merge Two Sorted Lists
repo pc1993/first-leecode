@@ -1,0 +1,24 @@
+充分利用已知条件
+
+
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode sum(0);
+        ListNode *list=&sum;
+       while(l1&&l2)
+       {
+           if(l1->val<l2->val)
+           {
+               list->next=l1;
+               l1=l1->next;
+           }
+           else
+           {
+               list->next=l2;
+               l2=l2->next;
+           }
+           list=list->next;
+       }
+        list->next=l1?l1:l2;//如果有一个短，一个长，那么判断没到尾部的链表，由于从小到大排序，只接加在list尾部就行了
+        return sum.next;
+    }
+};
