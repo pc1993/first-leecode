@@ -1,0 +1,30 @@
+<<，移位符，将当前二进制数变为原来的2倍
+dividend = INT_MIN and divisor = -1 (because abs(INT_MIN) = INT_MAX + 1).
+abs(int),labs(long int)
+^异或
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        if(divisor==0||(dividend==INT_MIN&&divisor==-1))//abs(INT_MIN) = INT_MAX + 1
+        {
+            return INT_MAX;
+        }
+        long long a=labs(dividend);
+        long long b=labs(divisor);
+        int sign=((dividend<0)^(divisor<0))?-1:1;
+        int sum=0;
+        while(a>=b)
+        {
+            long long tmp=b;
+            int mul=1;
+            while(a>=(tmp<<1))
+            {
+                tmp<<=1;
+                mul<<=1;
+            }
+            a-=tmp;
+            sum+=mul;
+        }
+        return sign==1?sum:-sum;
+    }
+};
