@@ -1,0 +1,42 @@
+substr(s,5),输出s中第五位及之后的序列
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        int n=s.size();
+        int m=words.size();
+        if(n<=0||m<=0)
+        {
+            return {};
+        }
+        int num_len=words[0].size();
+        unordered_map<string,int> count;
+        for(int i=0;i<m;i++)
+        {
+            count[words[i]]++;
+        }
+        vector<int> sum;
+        for(int i=0;i<n-m*num_len+1;i++)
+        {
+            unordered_map<string,int> aim;
+            int j=0;
+            for(;j<m;j++)
+            {
+                string ss=s.substr(i+j*num_len,num_len);
+                if(count.find(ss)!=count.end())
+                {
+                    aim[ss]++;
+                    if(aim[ss]>count[ss])
+                    {
+                        break;
+                    }
+                }
+                else break;
+            }
+            if(j==m)
+            {
+                sum.push_back(i);
+            }
+        }
+        return sum;
+    }
+};
