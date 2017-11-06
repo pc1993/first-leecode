@@ -1,0 +1,22 @@
+for(;;i++)     for(;;++i)
+效果一样，在for循环中，最后执行i++和++i，建议使用++i，速度更快
+
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int n=nums.size();
+        for(int i=0;i<n;++i)
+        {
+            while(nums[i]!=nums[nums[i]-1]&&nums[i]>0&&nums[i]<=n)//把数放在应该在的位置，比如说5，放在nums[4]
+                swap(nums[i],nums[nums[i]-1]);
+        }
+        for(int i=0;i<n;++i)
+        {
+            if(nums[i]!=i+1)
+            {
+                return i+1;
+            }           
+        }
+        return n+1;
+    }
+};
