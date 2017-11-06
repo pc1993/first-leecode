@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        vector<vector<int>> res;
+        vector<int> local;
+        find(res,0,target,local,candidates);
+        return res;
+    }
+    
+    void find(vector<vector<int>>& res,const int order,int target,vector<int>& local,vector<int> nums)
+    {
+        if(target==0)
+        {
+            res.push_back(local);
+            return;
+        }
+        else
+        {
+            for(int i=order;i<nums.size();i++)
+            {
+                if(nums[i]>target)
+                {
+                    return;
+                }
+                else if(i&&nums[i]==nums[i-1]&&i>order)
+                {
+                    continue;
+                }
+                local.push_back(nums[i]);
+                find(res,i+1,target-nums[i],local,nums);
+                local.pop_back();
+            }
+        }
+    }
+};
