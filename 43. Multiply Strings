@@ -1,0 +1,9 @@
+std::string::npos的定义：
+表示size_t的最大值（Maximum value for size_t）
+如果作为一个返回值（return value）表示没有找到匹配项
+    size_t idx = filename.find('.');   //作为return value，表示没有匹配项  
+    if(idx == string::npos)      
+    {  
+        cout << "filename does not contain any period!" << endl;  
+    }  
+string::npos作为string的成员函数的一个长度参数时，表示“直到字符串结束（until the end of the string）
