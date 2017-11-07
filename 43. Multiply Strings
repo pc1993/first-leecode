@@ -7,3 +7,73 @@ std::string::npos的定义：
         cout << "filename does not contain any period!" << endl;  
     }  
 string::npos作为string的成员函数的一个长度参数时，表示“直到字符串结束（until the end of the string）
+{
+    string num(10,'2');
+    int a=num[0]*num[1]       //这里要-'0'，不然就是ASCI码的运算
+    int b=1;
+    string c=b+num[2];        //这里无需-'0',可以直接得到结果3
+}
+to_string(),int转换成string
+string str = "123";
+int n = atoi(str.c_str());       string->int
+
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        int n=num1.size();
+        int m=num2.size();
+        string sum(m+n,'0');
+        for(int i=n-1;i>=0;--i)
+        {
+            int count=0;
+            for(int j=m-1;j>=0;--j)
+            {
+                int tem=sum[i+j+1]-'0'+(num1[i]-'0')*(num2[j]-'0')+count;
+                count=tem/10;
+                sum[i+j+1]=tem%10+'0';
+            }
+            sum[i]+=count;                                      //1.不加‘0’，2赋值给sum[i]
+        }
+        size_t startpos = sum.find_first_not_of("0");
+        if (string::npos != startpos) 
+        {
+            return sum.substr(startpos);                       //从star开始输出到最后一项
+        }
+        return "0";     
+    }
+};
+
+
+
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        int i, j;
+        int m = num1.size(), n = num2.size();
+        // max (m + n) digits
+        vector<int> product(m + n, 0);
+        string result;
+
+        // reverse for ease of calc
+        reverse(num1.begin(), num1.end());
+        reverse(num2.begin(), num2.end());
+
+        // digit i * digit j contributes to digit i + j
+        for (i = 0; i < m; i++) {
+            for (j = 0; j < n; j++) {
+                product[i + j] += (num1[i] - '0') * (num2[j] - '0');
+                product[i + j + 1] += product[i + j] / 10;
+                product[i + j] %= 10;
+            }
+        }
+
+        // remove leading 0; keep last 0 if all 0
+        for (i = m + n - 1; i > 0 && 0 == product[i]; i--)
+            ;
+        
+        for (; i >= 0; i--)
+            result += to_string(product[i]);
+
+        return result;
+    }
+};
