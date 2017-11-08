@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n=nums.size();
+        int step=0;
+        int maxend=0;
+        int end=0;
+        int i=0;
+        while(end<n-1)
+        {
+            step++;
+            for(;i<=end;i++)
+            {
+                maxend=max(maxend,i+nums[i]);
+                if(maxend>=n-1)
+                {
+                    return step;
+                }
+            }
+            if(maxend==end)
+            {
+                break;
+            }
+            end=maxend;
+        }
+        return step;
+    }
+};
